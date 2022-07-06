@@ -48,6 +48,8 @@ The configuration of dwm is done by creating a custom config.h
 and (re)compiling the source code.
 
 Note: This version of DWM uses:
+MOD+Enter to open a terminal window
+MOD+d to open dmenu
 MOD+Shift+Q to kill windows
 MOD+Shift+E to stop DWM
 
