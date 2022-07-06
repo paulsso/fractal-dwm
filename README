@@ -48,10 +48,12 @@ The configuration of dwm is done by creating a custom config.h
 and (re)compiling the source code.
 
 Notes on this configuration
------------
-
+------------
 MOD+Enter to open a terminal window
 MOD+d to open dmenu
 MOD+Shift+Q to kill windows
 MOD+Shift+E to stop DWM
+I've disabled monacle and floating, replaced them with centered master and centered master float,
+centered master is the default mode.
+Change layout option with mod+shift+y,u,o
 
