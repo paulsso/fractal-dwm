@@ -12,14 +12,24 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
+static const char col_red[]        = "#FE2712";
+static const char col_green[]        = "#B2D732";
+static const char col_blue[]        = "#347B98";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeStatus]  = { col_gray3, col_blue,  "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
+	[SchemeTagsSel]  = { col_gray4, col_red,  "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
+    [SchemeTagsNorm]  = { col_gray3, col_gray1,  "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
+    [SchemeInfoSel]  = { col_gray4, col_green,  "#000000"  }, // infobar middle  selected {text,background,not used but cannot be empty}
+    [SchemeInfoNorm]  = { col_gray3, col_gray1,  "#000000"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tagsalt[] = { "1", "2", "3", "4", "5", "6" };
+static const char *tags[] = { "codium", "st", "firefox", "steam", "discord", "spotify" };
+static const int momentaryalttags = 0; /* 1 means alttags will show only when key is held down*/
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -27,8 +37,12 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 4,       0,           -1 },
+	{ "spotify",  NULL,       NULL,    	  6,            0,           -1 },
+	{ "discord",  NULL,       NULL,    	  5,            0,           -1 },
+	{ "steam",    NULL,       NULL,    	  4,            0,           -1 },
+	{ "firefox",  NULL,       NULL,    	  3,            0,           -1 },
+	{ "st",  	  NULL,       NULL,    	  1 << 2,            0,           -1 },
+	{ "codium",   NULL,       NULL,       0 << 1,       		0,           -1 },
 };
 
 /* layout(s) */
@@ -42,6 +56,7 @@ static const Layout layouts[] = {
 	{ "|M|",      centeredmaster },    /* first entry is default */
 	{ "[]=",      tile },
 	{ ">M>",      centeredfloatingmaster },	
+	{ "[M]",      monocle },	
 };
 
 /* key definitions */
@@ -85,6 +100,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_n,      togglealttag,   {0} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
